@@ -1,0 +1,189 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: var(--bg-body); 
+    font-family: 'Montserrat', sans-serif;
+    transition: background 0.5s ease; 
+}
+:root {
+    --warna-neon: #667eea;
+    --bg-body: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-kartu: rgba(255, 255, 255, 0.1);
+}
+.card {
+    position: relative;
+    width: 380px; /* Lebar sudah disesuaikan agar nama tidak turun */
+    background: var(--bg-kartu);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    overflow: hidden; /* MEMOTONG bagian lampu yang di luar kotak */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.5s;
+    z-index: 1; /* Supaya konten tetap di atas */
+}
+.card::before {
+    content: '';
+    position: absolute;
+    width: 200%; /* Dibuat sangat besar agar rotasinya menutup seluruh sudut */
+    height: 200%;
+    background: conic-gradient(
+        transparent, 
+        var(--warna-neon), 
+        transparent, 
+        transparent, 
+        var(--warna-neon)
+    );
+    animation: putarNeon 4s linear infinite;
+    top: -50%;
+    left: -50%;
+    z-index: -2;
+}
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 4px; /* Ini adalah ketebalan garis neonnya */
+    background: var(--bg-kartu); 
+    border-radius: 16px;
+    z-index: -1; /* Di atas lampu, tapi di bawah teks */
+    backdrop-filter: blur(15px);
+}
+@keyframes putarNeon {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+.foto, .nama, .alamat, .sosmed, .about, button {
+    position: relative;
+    z-index: 2; /* Naikkan ke level paling atas */
+}
+
+.foto {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #333;
+    transition: transform 0.3s ease;
+}
+
+.foto:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.nama {
+    justify-content: center;
+    margin: 15px 0 5px 0;
+    font-weight: 700;
+    font-size: 22px; /* Ukuran disesuaikan biar gak nabrak */
+    color: #333;
+    letter-spacing: 1.8px;
+    margin-top: 30px;
+    animation: munculHalus 1s ease-out 0.3s backwards;
+}
+
+.alamat {
+    font-size: 12px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    color: #333;
+    font-weight: 400;
+    animation: munculHalus 1s ease-out 0.5s backwards;
+}
+
+button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s; /* Perbaikan koma jadi titik */
+    margin-top: 10px;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+button:hover {
+    background-color: #00b3b3;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Sosmed & About tetap sama, sudah bagus */
+.sosmed {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.sosmed a {
+    color: #333;
+    font-size: 24px;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.sosmed a:nth-child(1) { 
+        animation: munculHalus 0.5s ease-out 0.7s backwards; 
+}
+    .sosmed a:nth-child(2) { 
+        animation: munculHalus 0.5s ease-out 0.8s backwards; 
+}
+    .sosmed a:nth-child(3) { 
+        animation: munculHalus 0.5s ease-out 0.9s backwards; 
+}
+
+.sosmed a:hover {
+    color: #007bff;
+    transform: translateY(-5px);
+    display: inline-block;
+}
+
+.about {
+    margin: 20px 0;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 13px;
+    color: #333;
+}
+
+.about h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+     animation: munculHalus 1s ease-out 0.7s backwards;
+}
+
+.about p {
+     animation: munculHalus 1s ease-out 0.8s backwards;
+}
+
+/* Dark Mode Class */
+.dark-mode-active {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Animations */
+@keyframes munculHalus {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+#btnUtama:hover {
+    animation: pulse 1s infinite;
+}
