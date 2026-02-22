@@ -189,12 +189,15 @@ button:hover {
     animation: pulse 1s infinite;
 }
 @media (max-width: 480px) {
-.card { width: 85%; }
-.nama {
-font-size: 16px !important;
-white-space: nowrap;
-}
+    .nama {
+        font-size: 16px !important;
+        white-space: nowrap;
+    }
+    .card {
+        width: 85%;
+    }
 }
 
 
        
+
